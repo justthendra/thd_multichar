@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    user-select: none; /* Yazıların seçilmesini engeller */
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    /* Arka plan oyunun kendisi olacağı için şeffaf bırakıyoruz */
+    background: transparent; 
+}
+
+/* Ana Konteyner */
+.container {
+    display: flex;
+    justify-content: space-between; /* Sol ve sağı ayır */
+    width: 100%;
+    height: 100%;
+    padding: 3rem 4rem;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%); /* Hafif vinyet efekti */
+}
+
+/* --- SOL PANEL (Karakter Listesi) --- */
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Dikey ortalamayı iptal et */
+    padding-top: 20vh; /* Üstten %20 boşluk bırakarak aşağı al */
+    width: 350px;
+    height: 100%;
+}
+
+.header {
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.header h1 {
+    color: #2ecc71; /* Yeşil Tema */
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.header h2 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Slot Listesi Alanı */
+.slots-container {
+    flex: 1;
+    overflow-y: auto; /* Çok karakter varsa kaydırma çubuğu çıkar */
+    padding-right: 10px; /* Scrollbar için boşluk */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Kaydırma Çubuğu Tasarımı */
+.slots-container::-webkit-scrollbar {
+    width: 5px;
+}
+.slots-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+.slots-container::-webkit-scrollbar-thumb {
+    background: #2ecc71;
+    border-radius: 5px;
+}
+
+/* --- KART TASARIMLARI --- */
+.slot-card {
+    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.slot-card:hover {
+    background: rgba(40, 40, 40, 0.9);
+    transform: translateX(10px); /* Üzerine gelince sağa kayar */
+}
+
+/* Seçili Kart */
+.slot-card.active {
+    background: rgba(46, 204, 113, 0.15); /* Hafif yeşil arka plan */
+    border: 1px solid #2ecc71;
+    box-shadow: 0 0 20px rgba(46, 204, 113, 0.2);
+}
+
+/* Kart İçeriği */
+.slot-number {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+}
+
+.slot-card.active .slot-number {
+    color: rgba(46, 204, 113, 0.2);
+}
+
+.slot-name {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.slot-status {
+    color: #888;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Boş Slot Görünümü */
+.slot-card.empty {
+    border-style: dashed;
+    opacity: 0.7;
+}
+.slot-card.empty:hover {
+    opacity: 1;
+    border-color: #2ecc71;
+}
+
+/* --- SAĞ PANEL (Detaylar) --- */
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-end; -- Eski hizalama */
+    /* align-items: flex-end; -- Eski hizalama */
+    
+    /* Yeni Konumlandırma: Alt Orta */
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 480px; /* Ekstra kompakt: 520px -> 480px */
+    padding-bottom: 0;
+}
+
+.details-card {
+    display: flex;
+    flex-direction: row; /* YATAY DİZİLİM */
+    justify-content: space-between; /* İki uç tarafa yasla */
+    align-items: center; /* Dikey ortala */
+    background: rgba(0, 255, 34, 0.048);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    border-radius: 14px; /* Radius */
+    padding: 0.8rem 1.2rem; /* Padding ekstra daraltıldı */
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0,255,34,0.048);
+}
+
+.details-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Boşluk */
+    align-items: flex-start;
+    flex-basis: 35%;
+}
+
+/* Karakter İsmi */
+#char-name {
+    color: #fff;
+    font-size: 1.3rem; /* Font ekstra küçültüldü */
+    font-weight: 800;
+    margin-bottom: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+}
+
+/* Oyna Butonu */
+.play-btn {
+    background: #2ecc71;
+    color: #000;
+    border: none;
+    padding: 6px 0; /* Buton iyice inceltildi */
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem; /* Font küçüldü */
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 0;
+    box-shadow: 0 3px 8px rgba(46, 204, 113, 0.2);
+}
+
+.play-btn:hover {
+    background: #27ae60;
+}
+
+/* Sağ Taraf (Grid) */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px; /* Boşluk azaltıldı */
+    row-gap: 4px;
+    width: auto;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* HEPSİ SAĞA YASLI */
+    flex-direction: row; /* Yazı Sol, İkon Sağ (Varsayılan) */
+    background: transparent;
+    padding: 2px 0;
+    gap: 10px;
+}
+
+/* Tekrarlayan nth-child kurallarını siliyoruz, çünkü hepsi aynı format */
+
+.info-item span {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem; /* Font küçüldü */
+}
+
+.info-item i {
+    color: #fff;
+    background: #1d5f38;
+    padding: 6px; /* Padding küçüldü */
+    border-radius: 5px;
+    font-size: 0.9rem;
+    width: 26px; /* İkon kutusu küçüldü */
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}

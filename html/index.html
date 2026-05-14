@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>THD Multichar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container" id="multichar-container" style="display: none;">
+
+        <div class="left-panel">
+            <div class="header">
+                <h1>Karakter</h1>
+                <h2>Seçim Ekranı</h2>
+                <p>Bu ekrandan oyuna başlayacağın karakteri seçebilir ya da yeni bir karakter oluşturabilirsin.</p>
+            </div>
+            <div class="slots-container">
+            </div>
+        </div>
+
+        <div class="right-panel" id="char-details" style="display: none;">
+            <div class="details-card">
+                <div class="details-left">
+                    <!-- Üst Kısım: İsim -->
+                    <h2 id="char-name">Karakter Adı</h2>
+
+                    <!-- Orta Kısım: Buton -->
+                    <button id="play-btn" class="play-btn">Oyna</button>
+                </div>
+
+                <!-- Alt Kısım: İstatistikler -->
+                <div class="info-grid">
+                    <!-- Satır 1 -->
+                    <div class="info-item">
+                        <span id="job-text">İşsiz</span>
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <div class="info-item">
+                        <span id="cash-text">0</span>
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+
+                    <!-- Satır 2 -->
+                    <div class="info-item">
+                        <span id="dob-text">01.01.2000</span>
+                        <i class="fa-solid fa-calendar"></i>
+                    </div>
+                    <div class="info-item">
+                        <span id="bank-text">0</span>
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+
+                    <!-- Satır 3 -->
+                    <div class="info-item">
+                        <span id="gender-text">Erkek</span>
+                        <i class="fa-solid fa-venus-mars"></i>
+                    </div>
+                    <div class="info-item">
+                        <span id="nationality-text">Los Santos</span> <i class="fa-solid fa-earth-americas"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
